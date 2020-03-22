@@ -15,7 +15,7 @@
 
 ###### The model is not defined yet, I've make an approach:
 
-```JSON
+```JS
 {
 	name:{type:String, unique:true, required:[true, 'Squad Name required']},
 	verified:{type:Boolean, required:false, default:false},
