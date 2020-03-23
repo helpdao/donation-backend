@@ -2,6 +2,16 @@
 
 #### Back-end repository of the [donations portal](https://github.com/helpdao/donation-portal). 
 
+## How to run it?
+
+`git clone https://helpDAO/donation-backend.git`
+
+`cd donation-backend`
+
+`npm start`
+
+**Make sure that mongodb is running**
+
 ## How it's structured?
 
 - [routes](./routes) Dir to store the express' router modules of the app.
@@ -9,17 +19,25 @@
 - [models](./models) Dir to store the Mongoose models of the app.
 - [middlewares](./middlewares) Dir to store some middle-wares scripts.
 
+## Relevant Information:
+
+- #### API Listen Port: 3000
+
+- #### DB Listen Port: 27017
+
 ## Database Models:
 
 ### Squad:
 
-###### The model is not defined yet, I've make an approach:
-
 ```JS
 {
-	name:{type:String, unique:true, required:[true, 'Squad Name required']},
+	name:{type:String, unique:true, required:true},
 	verified:{type:Boolean, required:false, default:false},
 	signUpDate: { type: Date, default: Date.now() }
+	description:{type:String, unique:false, required:true},
+	inviteLink:{type:String, unique:false, required:true},
+	daoAddress:{type:String,unique:false, required:true},
+
 }
 ```
 
@@ -31,6 +49,8 @@
 
 ### Squad:
 
+**If you want to try the requests in postman you can use this [collection](https://www.getpostman.com/collections/df6e3300e1a1d5d05a80) **
+
 All the Squad's routes starts with these URL: ```localhost:3000/squad ```
 
 - #### Create new Squad
@@ -39,9 +59,20 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
 
   - Endpoint: ```/new```
 
+  - Header: ```{Content-Type: application/x-www-form-urlencoded}```
+
   - Body: 
 
-    ```{name:SquadName}```
+    ```JSON
+    {
+    	"name":"SquadTest",
+        "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "inviteLink":"t.me/squadTest",
+        "daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 "
+    }
+    ```
+
+    
 
   - Response:
 
@@ -51,6 +82,9 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
             "signUpDate": "2020-03-22T21:54:33.740Z",
             "_id": "5e77dedb7d032151fbfb3eb9",
             "name": "SquadTest",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        	"inviteLink":"t.me/squadTest",
+        	"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",
             "__v": 0
         }
     ```
@@ -71,6 +105,9 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
             "signUpDate": "2020-03-22T21:54:33.740Z",
             "_id": "5e77dedb7d032151fbfb3eb9",
             "name": "SquadTest",
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        	"inviteLink":"t.me/squadTest",
+        	"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",        
             "__v": 0
         }
     ```
@@ -80,6 +117,8 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
   - Method: POST
 
   - Endpoint: ```/find```
+
+  - Header: ```{Content-Type: application/x-www-form-urlencoded}```
 
   - Body:
 
@@ -105,10 +144,13 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
             "signUpDate": "2020-03-22T21:54:33.740Z",
             "_id": "5e77dedb7d032151fbfb3eb9",
             "name": "SquadTest",
-            "__v": 0
+            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        	"inviteLink":"t.me/squadTest",
+        	"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",        
+          "__v": 0
         }
     ```
-
+    
     
 
 - #### Get all the Squads
@@ -127,6 +169,9 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
                 "signUpDate": "2020-03-22T21:54:33.740Z",
                 "_id": "5e77de9d7d032151fbfb3eb8",
                 "name": "SquadTest",
+            	"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        		"inviteLink":"t.me/squadTest",
+        		"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",            
                 "__v": 0
             },
             {
@@ -134,6 +179,9 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
                 "signUpDate": "2020-03-22T21:54:33.740Z",
                 "_id": "5e77dedb7d032151fbfb3eb9",
                 "name": "SquadTest2",
+            	"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        		"inviteLink":"t.me/squadTest2",
+        		"daoAddress":"0x4e709797a971e49018402446f753d467275f75ad ",            
                 "__v": 0
             }
         ]
@@ -156,6 +204,9 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
                 "signUpDate": "2020-03-22T21:54:33.740Z",
                 "_id": "5e77de9d7d032151fbfb3eb8",
                 "name": "SquadTest",
+            	"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        		"inviteLink":"t.me/squadTest",
+        		"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",             
                 "__v": 0
             }
         ]
@@ -178,17 +229,19 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
                 "signUpDate": "2020-03-22T21:54:33.740Z",
                 "_id": "5e77dedb7d032151fbfb3eb9",
                 "name": "SquadTest2",
+            	"description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        		"inviteLink":"t.me/squadTest2",
+        		"daoAddress":"0x4e709797a971e49018402446f753d467275f75ad ",             
                 "__v": 0
             }
         ]
     }
     ```
 
-- #### 
 
 ## How to contribute?
 
-Lets make an standard for the scripts' naming, every file should follow the next schema:
+Lets make an standard for the scripts' naming, every file should follow the next pattern:
 
 ```filename.dirname.extension```
 
@@ -198,9 +251,9 @@ Where ***dirname*** is the directory where is contained the file.
 
 ```filename.extension```
 
-
-
 **Also lets avoid to use names that begins with uppercase.**
+
+#### Steps:
 
 - Fork the repo and switch to a new branch using `git checkout -b [branch_name]`
 - Code your stuff.

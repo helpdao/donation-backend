@@ -4,7 +4,8 @@
   "description": "The Backend Structure of the helpDAO donation's portal",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node index.js --unhandled-rejections=strict"
   },
   "author": "",
   "license": "ISC",

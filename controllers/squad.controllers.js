@@ -13,59 +13,93 @@ const etherumValidator = require('../middlewares/etherumAddressValidator.middlew
  * - Maybe a login implementation too? (For supervisors)
  * */
 module.exports.createSquad = async (req, res) => {
-	let squad= new Squad(req.body);
-	squad.save((err, newSquad) => {
-		if(err) return res.status(400).send({message:'Error saving the new squad', err});
-		return res.status(200).send({message:'New squad created', newSquad});
-	});
+	try{
+		let squad= await new Squad(req.body);
+		await Squad.save((err, newSquad) => {
+			if(err) return res.status(400).send({message:'Error saving the new squad', err});
+			return res.status(200).send({message:'New squad created', newSquad});
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error saving the new squad', err})
+	}
 }
 module.exports.deleteSquad = async (req, res) => {
-	const squadId = req.params;
-	await Squad.findByIdAndRemove(squadId, (err, squad) => {
-		if(err) return res.status(500).send({message:'Error removing the squad', err});
-		return res.status(200).send({message:'Squad removed correctly',squad});
-	})
+	try{
+		const squadId = req.params;
+		await Squad.findByIdAndRemove(squadId, (err, squad) => {
+			if(err) return res.status(500).send({message:'Error removing the squad', err});
+			return res.status(200).send({message:'Squad removed correctly',squad});
+		})
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}
 }
 module.exports.updateSquad = async (req, res) => {
-	//Review this, because it's failing
-	let squadId = req.params;
-	let body = req.body;
-	await Squad.findByIdAndUpdate(squadId, {$set:body}, { new: true }, (err, squad) => {
- 		if (err) return res.status(500).send({ message:'Error updating the squad',err });
-		return res.status(200).send({ message:'Squad updated', squad });
- 	 });
+	try{
+		//Review this, because it's failing
+		let squadId = req.params;
+		let body = req.body;
+		await Squad.findByIdAndUpdate(squadId, {$set:body}, { new: true }, (err, squad) => {
+			if (err) return res.status(500).send({ message:'Error updating the squad',err });
+			return res.status(200).send({ message:'Squad updated', squad });
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}
 }
 module.exports.getSquad = async (req, res) => {
-	let squadId = req.params.squadId;
-	console.log(squadId)
-	await Squad.findById(squadId, (err, squad) => {
-		if(err) return res.status(500).send({message:'Error finding squad', err});
-		return res.status(200).send({squad});
-	});
+	try{
+		let squadId = req.params.squadId;
+		console.log(squadId)
+		await Squad.findById(squadId, (err, squad) => {
+			if(err) return res.status(500).send({message:'Error finding squad', err});
+			return res.status(200).send({squad});
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}	
+
 }
 module.exports.findSquad = async (req, res) => {
-	let param = req.body;
-	await Squad.find(param, (error, squad) => {
-	if (error) return res.status(404).send({ message: 'No squad found', error });
-	return res.status(200).send(squad);
-	});
+	try{
+		let param = req.body;
+		await Squad.find(param, (error, squad) => {
+		if (error) return res.status(404).send({ message: 'No squad found', error });
+		return res.status(200).send(squad);
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}	
+
 }
 module.exports.getAllSquads = async (req, res) => {
-	await Squad.find({}, (err, squads) => {
-		if(err) return res.status(500).send({message:'Error getting all the squads', err});
-		return res.status(200).send({squads});
-	});
+	try{
+		await Squad.find({}, (err, squads) => {
+			if(err) return res.status(500).send({message:'Error getting all the squads', err});
+			return res.status(200).send({squads});
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}	
 }
 module.exports.getAllVerifiedSquads = async (req, res) => {
-	await Squad.find({verified:true}, (err, squads) => {
-		if(err) return res.status(500).send({message:'Error getting all the verified squads', err});
-		return res.status(200).send({squads});
-	});
+	try{
+		await Squad.find({verified:true}, (err, squads) => {
+			if(err) return res.status(500).send({message:'Error getting all the verified squads', err});
+			return res.status(200).send({squads});
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}	
 }
 module.exports.getAllUnverifiedSquads = async (req, res) => {
-	 await Squad.find({verified:false}, (err, squads) => {
-		if(err) return res.status(500).send({message:'Error getting all the unverifieds squads', err});
-		return res.status(200).send({squads});
-	});
+	try{
+		await Squad.find({verified:false}, (err, squads) => {
+			if(err) return res.status(500).send({message:'Error getting all the unverifieds squads', err});
+			return res.status(200).send({squads});
+		});
+	}catch(err){
+		return res.status(500).send({message:'Error removing the squad', err})
+	}	
 }
 
