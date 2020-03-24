@@ -1,0 +1,15 @@
+version: "2"
+services:
+  nodeserver:
+    build: .
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    command: mongod --port 27018
+    ports:
+      - "27018:27018"
+
+
