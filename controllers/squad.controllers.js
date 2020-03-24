@@ -12,6 +12,7 @@ const etherumValidator = require("../middlewares/etherumAddressValidator.middlew
  *   the power to execute this request.
  * - Maybe a login implementation too? (For supervisors)
  * */
+
 module.exports.createSquad = async (req, res) => {
   try {
     const newSquad = new Squad(req.body);
@@ -27,8 +28,13 @@ module.exports.deleteSquad = async (req, res) => {
   try {
     const squadId = req.params;
     await Squad.findByIdAndRemove(squadId, (err, squad) => {
-      if (err) return res.status(500).send({ message: "Error removing the squad", err });
-      return res.status(200).send({ message: "Squad removed correctly", squad });
+      if (err)
+        return res
+          .status(500)
+          .send({ message: "Error removing the squad", err });
+      return res
+        .status(200)
+        .send({ message: "Squad removed correctly", squad });
     });
   } catch (err) {
     return res.status(500).send({ message: "Error removing the squad", err });
@@ -39,7 +45,11 @@ module.exports.updateSquad = async (req, res) => {
   try {
     const { squadId } = req.params;
     const { squadDetails } = req.body;
-    const squad = await Squad.findOneAndUpdate(squadId, { $set: squadDetails }, { upsert: true });
+    const squad = await Squad.findOneAndUpdate(
+      squadId,
+      { $set: squadDetails },
+      { upsert: true }
+    );
     return res.status(200).send({ message: "Squad updated", squad });
   } catch (err) {
     console.log(err);
@@ -52,7 +62,8 @@ module.exports.getSquad = async (req, res) => {
     let squadId = req.params.squadId;
     console.log(squadId);
     await Squad.findById(squadId, (err, squad) => {
-      if (err) return res.status(500).send({ message: "Error finding squad", err });
+      if (err)
+        return res.status(500).send({ message: "Error finding squad", err });
       return res.status(200).send({ squad });
     });
   } catch (err) {
@@ -64,7 +75,8 @@ module.exports.findSquad = async (req, res) => {
   try {
     let param = req.body;
     await Squad.find(param, (error, squad) => {
-      if (error) return res.status(404).send({ message: "No squad found", error });
+      if (error)
+        return res.status(404).send({ message: "No squad found", error });
       return res.status(200).send(squad);
     });
   } catch (err) {
@@ -75,7 +87,10 @@ module.exports.findSquad = async (req, res) => {
 module.exports.getAllSquads = async (req, res) => {
   try {
     await Squad.find({}, (err, squads) => {
-      if (err) return res.status(500).send({ message: "Error getting all the squads", err });
+      if (err)
+        return res
+          .status(500)
+          .send({ message: "Error getting all the squads", err });
       return res.status(200).send({ squads });
     });
   } catch (err) {
@@ -86,7 +101,10 @@ module.exports.getAllSquads = async (req, res) => {
 module.exports.getAllVerifiedSquads = async (req, res) => {
   try {
     await Squad.find({ verified: true }, (err, squads) => {
-      if (err) return res.status(500).send({ message: "Error getting all the verified squads", err });
+      if (err)
+        return res
+          .status(500)
+          .send({ message: "Error getting all the verified squads", err });
       return res.status(200).send({ squads });
     });
   } catch (err) {
@@ -97,7 +115,10 @@ module.exports.getAllVerifiedSquads = async (req, res) => {
 module.exports.getAllUnverifiedSquads = async (req, res) => {
   try {
     await Squad.find({ verified: false }, (err, squads) => {
-      if (err) return res.status(500).send({ message: "Error getting all the unverifieds squads", err });
+      if (err)
+        return res
+          .status(500)
+          .send({ message: "Error getting all the unverifieds squads", err });
       return res.status(200).send({ squads });
     });
   } catch (err) {
