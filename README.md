@@ -21,7 +21,7 @@
 
 ## Relevant Information:
 
-- #### API Listen Port: 3000
+- #### API Listen Port: 3001
 
 - #### DB Listen Port: 27017
 
@@ -51,7 +51,7 @@
 
 **If you want to try the requests in postman you can use this [collection](https://www.getpostman.com/collections/df6e3300e1a1d5d05a80)**
 
-All the Squad's routes starts with these URL: ```localhost:3000/squad ```
+All the Squad's routes starts with these URL: ```localhost:3001/squad ```
 
 - #### Create new Squad
 
@@ -59,7 +59,7 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
 
   - Endpoint: ```/new```
 
-  - Header: ```{Content-Type: application/x-www-form-urlencoded}```
+  - Header: ```{Content-Type: application/json}```
 
   - Body: 
 
@@ -118,7 +118,7 @@ All the Squad's routes starts with these URL: ```localhost:3000/squad ```
 
   - Endpoint: ```/find```
 
-  - Header: ```{Content-Type: application/x-www-form-urlencoded}```
+  - Header: ```{Content-Type: application/json}```
 
   - Body:
 
