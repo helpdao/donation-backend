@@ -50,6 +50,7 @@
 ### Squad:
 
 **If you want to try the requests in postman you can use this [collection](https://www.getpostman.com/collections/df6e3300e1a1d5d05a80)**
+###### Just click the import button (Top-Left corner), paste the link in the "Import from link" section and click import.
 
 All the Squad's routes starts with these URL: ```localhost:3001/squad ```
 
