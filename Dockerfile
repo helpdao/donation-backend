@@ -9,6 +9,6 @@ RUN npm install --no-optional
 COPY . .
 RUN mv .index.docker.js index.js
 #Expose port and start application
-EXPOSE 3002
+EXPOSE 3001
 CMD [ "npm", "start" ]
 
