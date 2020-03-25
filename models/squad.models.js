@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const etherumValidator = require("../middlewares/etherumAddressValidator.middlewares.js");
-
 const { Schema } = mongoose;
 
 const squadSchema = new Schema({
