@@ -12,6 +12,14 @@
 
 **Make sure that mongodb is running**
 
+#### Using Docker
+
+`git clone https://helpDAO/donation-backend.git`
+
+`cd donation-backend`
+
+`docker-compose up -d ` 
+
 ## How it's structured?
 
 - [routes](./routes) Dir to store the express' router modules of the app.
@@ -19,11 +27,25 @@
 - [models](./models) Dir to store the Mongoose models of the app.
 - [middlewares](./middlewares) Dir to store some middle-wares scripts.
 
-## Relevant Information:
+# Relevant Information:
+
+## Ports:
+
+### Localhost:
 
 - #### API Listen Port: 3001
 
 - #### DB Listen Port: 27017
+
+### Docker:
+
+- #### API Listen Port: 3001
+
+- #### DB Listen Port: 27018
+
+---
+
+
 
 ## Database Models:
 
@@ -262,4 +284,6 @@ Where ***dirname*** is the directory where is contained the file.
 - Make a pull request from your forked repo.
 
 #### Thanks for your contribution.
+
+---
 
