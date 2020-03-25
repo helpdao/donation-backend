@@ -1,5 +1,5 @@
 const Squad = require("../models/squad.models.js");
-const etherumValidator = require("../middlewares/etherumAddressValidator.middlewares.js");
+const web3 = require("web3");
 /*AUTHOR: w0xter
  *If you have any doubt you can find me in the helpDAO's discord as w0xter.
  *This is a simple CRUD to manage the squads of HelpDAO donation's portal.
@@ -16,10 +16,17 @@ const etherumValidator = require("../middlewares/etherumAddressValidator.middlew
 module.exports.createSquad = async (req, res) => {
   try {
     const newSquad = new Squad(req.body);
-    await newSquad.save();
-    return res.status(200).send({ message: "New squad created", newSquad });
+    //Checking if the daoAddress is valid
+    isAddress = await web3.utils.isAddress(newSquad.daoAddress);
+    if (isAddress) {
+      await newSquad.save();
+      return res.status(200).send({ message: "New squad created", newSquad });
+    } else {
+      return res
+        .status(500)
+        .send({ message: "The address is not valid", newSquad });
+    }
   } catch (err) {
-    console.log(err);
     return res.status(400).send({ message: "Error saving the new squad", err });
   }
 };
