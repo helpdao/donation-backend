@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const app = require("./app");
 
 const mongodb = "mongodb://mongo:27018/portaldb";
-const port = 3002;
+const port = 3001;
 
 mongoose.set("useCreateIndex", true);
 
