@@ -39,7 +39,7 @@
 
 ### Docker:
 
-- #### API Listen Port: 3002
+- #### API Listen Port: 3001
 
 - #### DB Listen Port: 27018
 
