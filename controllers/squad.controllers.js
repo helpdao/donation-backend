@@ -81,10 +81,10 @@ module.exports.getSquad = async (req, res) => {
 module.exports.findSquad = async (req, res) => {
   try {
     let param = req.body;
-    await Squad.find(param, (error, squad) => {
+    await Squad.find(param, (error, squads) => {
       if (error)
         return res.status(404).send({ message: "No squad found", error });
-      return res.status(200).send(squad);
+      return res.status(200).send({squads});
     });
   } catch (err) {
     return res.status(500).send({ message: "Error removing the squad", err });
