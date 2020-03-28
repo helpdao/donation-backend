@@ -162,7 +162,7 @@ All the Squad's routes starts with these URL: ```localhost:3001/squad ```
   - Response:
 
     ```JSON
-        {
+        "squads": [ {
             "verified": false,
             "signUpDate": "2020-03-22T21:54:33.740Z",
             "_id": "5e77dedb7d032151fbfb3eb9",
@@ -172,6 +172,7 @@ All the Squad's routes starts with these URL: ```localhost:3001/squad ```
         	"daoAddress":"0x0472ec0185ebb8202f3d4ddb0226998889663cf2 ",        
           "__v": 0
         }
+	]
     ```
     
     
