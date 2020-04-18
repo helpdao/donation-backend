@@ -56,9 +56,10 @@
 	name:{type:String, unique:true, required:true},
 	verified:{type:Boolean, required:false, default:false},
 	signUpDate: { type: Date, default: Date.now() }
-	description:{type:String, unique:false, required:true},
+	description:{type:String, unique:false, maxlength:10000, required:true},
 	inviteLink:{type:String, unique:false, required:true},
 	daoAddress:{type:String,unique:false, required:true},
+	donationAddress:{type:String,unique:false, required:true},
 
 }
 ```
