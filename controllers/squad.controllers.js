@@ -17,8 +17,9 @@ module.exports.createSquad = async (req, res) => {
   try {
     const newSquad = new Squad(req.body);
     //Checking if the daoAddress is valid
-    isAddress = await web3.utils.isAddress(newSquad.daoAddress);
-    if (isAddress) {
+    validDAOAddress = await web3.utils.isAddress(newSquad.daoAddress);
+    validDonationAddress = await web3.utils.isAddress(newSquad.donationAddress);
+    if (validDAOAddress && validDonationAddress) {
       await newSquad.save();
       return res.status(200).send({ message: "New squad created", newSquad });
     } else {
@@ -84,7 +85,7 @@ module.exports.findSquad = async (req, res) => {
     await Squad.find(param, (error, squads) => {
       if (error)
         return res.status(404).send({ message: "No squad found", error });
-      return res.status(200).send({squads});
+      return res.status(200).send({ squads });
     });
   } catch (err) {
     return res.status(500).send({ message: "Error removing the squad", err });

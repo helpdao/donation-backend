@@ -8,6 +8,7 @@ const squadSchema = new Schema({
   description: {
     type: String,
     unique: false,
+    maxlength: 10000,
     required: [true, "Squad description required"],
   },
   inviteLink: {
@@ -19,6 +20,11 @@ const squadSchema = new Schema({
     type: String,
     unique: false,
     required: [true, "The DAO address required"],
+  },
+  donationAddress: {
+    type: String,
+    unique: false,
+    required: [true, "The Donation Address is required"],
   },
   signUpDate: { type: Date, default: Date.now() },
 });
